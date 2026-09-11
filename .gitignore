@@ -1,0 +1,18 @@
+# Node
+node_modules/
+
+# Python
+venv/
+env/
+__pycache__/
+*.pyc
+
+# Environment Variables (Security)
+.env
+
+# Datasets
+*.csv
+
+# ignores main datafile and large .pkl ML file
+*.txt
+*.pkl
