@@ -20,7 +20,7 @@ app.add_middleware(
 # --- LOAD AI MODELS ---
 print("Waking up AI models...")
 # UPDATE: We are now loading the new compressed model so Vercel/Render doesn't crash!
-rf_model = joblib.load('compressed_model.joblib', mmap_mode='r')
+rf_model = joblib.load('compressed_model.joblib')
 iso_forest = joblib.load('anomaly_detection_model.pkl')
 print("AI is online!")
 
@@ -87,4 +87,3 @@ def detect_anomaly(req: AnomalyRequest):
     # The model outputs -1 if it's an anomaly, 1 if normal
     is_abnormal = True if prediction == -1 else False
     return {"is_anomaly": is_abnormal}
-
