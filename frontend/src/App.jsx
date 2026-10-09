@@ -35,7 +35,7 @@ function App() {
     setAuthError('')
     const endpoint = isLoginMode ? 'login' : 'signup'
     try {
-      const res = await fetch(`http://localhost:3000/api/${endpoint}`, {
+      const res = await fetch(`https://smartpowerai-project.onrender.com/api/${endpoint}`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(authForm)
       })
       const data = await res.json()
@@ -51,16 +51,16 @@ function App() {
   }
 
   const fetchDashboardData = (username) => {
-    fetch('http://localhost:3000/api/dashboard', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username }) })
+    fetch('https://smartpowerai-project.onrender.com/api/dashboard', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username }) })
       .then(res => res.json()).then(data => setDashboard(data))
-    fetch(`http://localhost:3000/api/history/${username}`)
+    fetch(`https://smartpowerai-project.onrender.com/api/history/${username}`)
       .then(res => res.json()).then(data => setHistory(data))
   }
 
   const runOptimizer = async (e) => {
     e.preventDefault()
     const payload = { ...optData, username: user.username }
-    const res = await fetch('http://localhost:3000/api/smart-optimize', {
+    const res = await fetch('https://smartpowerai-project.onrender.com/api/smart-optimize', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
     })
     setOptResult(await res.json())
@@ -69,7 +69,8 @@ function App() {
 
   const runAnomalyCheck = async (e) => {
     e.preventDefault()
-    const res = await fetch('http://127.0.0.1:8000/api/anomaly', {
+    // Hitting the Python ML backend on port 10000 via Render
+    const res = await fetch('https://smartpowerai-project-1.onrender.com/api/anomaly', {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(anomalyData)
     })
     setAnomalyResult(await res.json())
